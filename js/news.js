@@ -14,16 +14,26 @@ const showCategories = data => {
     const categoriesContainer = document.getElementById('categories-container');
     data.news_category.forEach(singleNews => {
         categoriesContainer.innerHTML += `
-    <a class="nav-link active" aria-current="page" href="#" onclick="fetchCategoryNews('${singleNews.category_id}')">${singleNews.category_name}</a>
+    <a class="nav-link active" aria-current="page" href="#" onclick="fetchCategoryNews('${singleNews.category_id}', '${singleNews.category_name}')">${singleNews.category_name}</a>
     `;
     })
 }
 
 // fetch all newses available in a category
 
-const fetchCategoryNews =category_id =>{
-    const url =(`https://openapi.programming-hero.com/api/news/category/${category_id}`)
+const fetchCategoryNews = (category_id, category_name) => {
+    const url = (`https://openapi.programming-hero.com/api/news/category/${category_id}`)
     fetch(url)
-    .then(res => res.json())
-    .then(data => console.log(data.data))
+        .then(res => res.json())
+        .then(data => showAllNews(data.data, category_name))
+}
+
+// show total news number and news category name 
+
+const showAllNews = (data, category_name) => {
+    // console.log(data, category_name)
+    const newsCount = document.getElementById('news-count');
+    newsCount.innerText = data.length;
+    const categoryName = document.getElementById('category-name');
+    categoryName.innerText = category_name;
 }
