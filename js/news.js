@@ -41,7 +41,7 @@ const showAllNews = (data, category_name) => {
     newsContainer.textContent=" ";
     data.forEach(singleNews => {
         console.log(singleNews)
-        const {image_url,title,details,author} = singleNews;
+        const {image_url,title,details,author,total_view,rating} = singleNews;
         newsContainer.innerHTML += `
      <div class="card mb-3" style="max-width: 100%;">
      <div class="row g-0">
@@ -54,8 +54,8 @@ const showAllNews = (data, category_name) => {
                  <p class="card-text">${details.slice(0,200)}...</p>
             </div>
 
-            <div class ="card-footer border-0 bg-body">
-                <div class = d-flex gap-4>
+            <div class ="card-footer border-0 bg-body d-flex justify-content-between">
+                <div class =d-flex gap-4>
                  <img src="${author.img}" class="img-fluid rounded-circle mx-2" height="40px" width="40px" alt=". . .">
                  <div>
                      <p class="p-0 m-0">${author.name}</p>
@@ -64,14 +64,21 @@ const showAllNews = (data, category_name) => {
                 </div>
                 
 
-             <div>
+             <div class="d-flex align-items-center">
+                <i class="fas fa-eye"></i>
+                <p class="px-1 m-0">${total_view}</p>
              
              </div>
-             <div>
-             
+             <div class="d-flex align-items-center">
+             <p class="px-1 m-0">${rating.number}</p>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star"></i>
+             <i class="fas fa-star-half"></i>
              </div>
              <div>
-             
+             <i class="fas fa-arrow-right"></i>
              </div>
              </div>
          </div>
