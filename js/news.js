@@ -40,8 +40,9 @@ const showAllNews = (data, category_name) => {
     const newsContainer = document.getElementById('all-news');
     newsContainer.textContent=" ";
     data.forEach(singleNews => {
-        console.log(singleNews)
-        const {image_url,title,details,author,total_view,rating} = singleNews;
+        // console.log(singleNews)
+        const {image_url,title,details,author,total_view,rating,_id
+        } = singleNews;
         newsContainer.innerHTML += `
      <div class="card mb-3" style="max-width: 100%;">
      <div class="row g-0">
@@ -78,7 +79,7 @@ const showAllNews = (data, category_name) => {
              <i class="fas fa-star-half"></i>
              </div>
              <div>
-             <i class="fas fa-arrow-right"></i>
+             <i class="fas fa-arrow-right" onclick="showNewDetail('${_id}')"></i>
              </div>
              </div>
          </div>
@@ -88,5 +89,13 @@ const showAllNews = (data, category_name) => {
     })
 }
 
+//  Show news detail in modal
+
+const showNewDetail = news_id =>{
+    let url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+    fetch (url)
+    .then(res => res.json())
+    .then(data => console.log(data.data))
+}
 
 
