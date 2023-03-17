@@ -67,7 +67,7 @@ const showAllNews = (data, category_name) => {
 
              <div class="d-flex align-items-center">
                 <i class="fas fa-eye"></i>
-                <p class="px-1 m-0">${total_view}</p>
+                <p class="px-1 m-0">${total_view ? total_view : "Not available"}</p>
              
              </div>
              <div class="d-flex align-items-center">
@@ -103,15 +103,14 @@ const LoadNewsDetail = news_id =>{
 
 const showNewsDetail = newsDetail =>{
     console.log(newsDetail)
-    const {image_url,title,details,author,total_view,rating,_id
-    } = newsDetail;
+    const {image_url,title,details,author,total_view,rating,others_info} = newsDetail;
 const modalDetail = document.getElementById('exampleModal');
 modalDetail.innerHTML =`
 <div class="modal-dialog">
     <div class="modal-content">
 
         <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">${title}</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">${title} <span class="badge text-bg-warning">${others_info.is_trending ? "Trending" : "" }</span></h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -132,7 +131,7 @@ modalDetail.innerHTML =`
 
             <div class="d-flex align-items-center">
                 <i class="fas fa-eye"></i>
-                <p class="px-1 m-0">${total_view}</p>
+                <p class="px-1 m-0">${total_view ? total_view : "Not available"}</p>
             </div>
 
             <div class="d-flex align-items-center">
