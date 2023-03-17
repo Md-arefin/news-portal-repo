@@ -1,6 +1,6 @@
 // tailwind 17/03/23
 // async wait
-
+let fetchData = [];
 const fetchCategories = () => {
     fetch("https://openapi.programming-hero.com/api/news/categories")
         .then(res => res.json())
@@ -25,7 +25,10 @@ const fetchCategoryNews = (category_id, category_name) => {
     const url = (`https://openapi.programming-hero.com/api/news/category/${category_id}`)
     fetch(url)
         .then(res => res.json())
-        .then(data => showAllNews(data.data, category_name))
+        .then(data => {
+            fetchData = data.data,
+            showAllNews(data.data, category_name)
+        })
 }
 
 // show total news number and news category name 
@@ -59,7 +62,7 @@ const showAllNews = (data, category_name) => {
                 <div class =d-flex gap-4>
                  <img src="${author.img}" class="img-fluid rounded-circle mx-2" height="40px" width="40px" alt=". . .">
                  <div>
-                     <p class="p-0 m-0">${author.name}</p>
+                     <p class="p-0 m-0">${author.name ? author.name : "Not available"}</p>
                      <p class="p-0 m-0">${author.published_date}</p>
                  </div>
                 </div>
@@ -95,7 +98,7 @@ const LoadNewsDetail = news_id =>{
     let url = `https://openapi.programming-hero.com/api/news/${news_id}`;
     fetch (url)
     .then(res => res.json())
-    .then(data => showNewsDetail(data.data[0]))
+    .then(data =>  showNewsDetail(data.data[0]))
 }
 
 
@@ -123,7 +126,7 @@ modalDetail.innerHTML =`
             <div class =d-flex gap-4>
                 <img src="${author.img}" class="img-fluid rounded-circle mx-2" height="40px" width="40px" alt=". . .">
                 <div>
-                    <p class="p-0 m-0">${author.name}</p>
+                    <p class="p-0 m-0">${author.name ? author.name : "Not available"}</p>
                     <p class="p-0 m-0">${author.published_date}</p>
                 </div>
             </div>
@@ -152,5 +155,13 @@ modalDetail.innerHTML =`
     </div>
 </div>
 `
+}
+
+// show trending news 
+
+const showTrending = () =>{
+    const trendingNews = fetchData.filter(singleData => singleData.others_info.is_trending === true);
+    const category_name = document.getElementById('category-name').innerText;
+    showAllNews(trendingNews, category_name)
 }
 
