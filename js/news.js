@@ -79,7 +79,7 @@ const showAllNews = (data, category_name) => {
              <i class="fas fa-star-half"></i>
              </div>
              <div>
-             <i class="fas fa-arrow-right" onclick="showNewDetail('${_id}')"></i>
+             <i class="fas fa-arrow-right" onclick="LoadNewsDetail('${_id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
              </div>
              </div>
          </div>
@@ -89,13 +89,69 @@ const showAllNews = (data, category_name) => {
     })
 }
 
-//  Show news detail in modal
+// Load News detail
 
-const showNewDetail = news_id =>{
+const LoadNewsDetail = news_id =>{
     let url = `https://openapi.programming-hero.com/api/news/${news_id}`;
     fetch (url)
     .then(res => res.json())
-    .then(data => console.log(data.data))
+    .then(data => showNewsDetail(data.data[0]))
 }
 
+
+//  Show news detail in modal
+
+const showNewsDetail = newsDetail =>{
+    console.log(newsDetail)
+    const {image_url,title,details,author,total_view,rating,_id
+    } = newsDetail;
+const modalDetail = document.getElementById('exampleModal');
+modalDetail.innerHTML =`
+<div class="modal-dialog">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">${title}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+            <img src="${image_url}" class="img-fluid rounded-start mb-2" style="height:250px;"  alt="...">
+            <p>${details}</p>
+
+            <div class ="border-0 bg-body d-flex justify-content-between">
+
+            <div class =d-flex gap-4>
+                <img src="${author.img}" class="img-fluid rounded-circle mx-2" height="40px" width="40px" alt=". . .">
+                <div>
+                    <p class="p-0 m-0">${author.name}</p>
+                    <p class="p-0 m-0">${author.published_date}</p>
+                </div>
+            </div>
+
+
+            <div class="d-flex align-items-center">
+                <i class="fas fa-eye"></i>
+                <p class="px-1 m-0">${total_view}</p>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <p class="px-1 m-0">${rating.number}</p>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+            </div>
+            
+        </div>
+
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+`
+}
 
