@@ -126,7 +126,7 @@ modalDetail.innerHTML =`
 
         <div class="modal-body">
         <h5 class="card-title mb-1">${title} <span class="badge  text-bg-info">${others_info.is_trending
-            ? "Trending" : ""}</span></h5>
+            ? "Trending" : ""}</span><span class="badge  text-bg-info">${others_info.is_todays_pick ? "Todays pick" : ""}</span></h5>
             <img src="${image_url}" class="img-fluid rounded-start mb-2" style="height:250px;"  alt="...">
             <p>${details}</p>
 
@@ -180,5 +180,4 @@ const showTodaysPick = () =>{
     const todaysPickNews = fetchData.filter(pickNews => pickNews.others_info.is_todays_pick === true);
     const category_name = document.getElementById('category-name').innerText;
     showAllNews(todaysPickNews,category_name);
-
 }
