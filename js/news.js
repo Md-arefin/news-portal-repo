@@ -126,7 +126,7 @@ modalDetail.innerHTML =`
 
         <div class="modal-body">
         <h5 class="card-title mb-1">${title} <span class="badge  text-bg-info">${others_info.is_trending
-            ? "Trending" : "Not Available"}</span></h5>
+            ? "Trending" : ""}</span></h5>
             <img src="${image_url}" class="img-fluid rounded-start mb-2" style="height:250px;"  alt="...">
             <p>${details}</p>
 
