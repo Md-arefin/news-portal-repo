@@ -73,6 +73,7 @@ const showAllNews = (data, category_name) => {
                 <p class="px-1 m-0">${total_view ? total_view : "Not available"}</p>
              
              </div>
+
              <div class="d-flex align-items-center">
              <p class="px-1 m-0">${rating.number}</p>
              <i class="fas fa-star"></i>
@@ -82,9 +83,16 @@ const showAllNews = (data, category_name) => {
              <i class="fas fa-star-half"></i>
              </div>
              <div>
-             <i class="fas fa-arrow-right" onclick="LoadNewsDetail('${_id}')" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+             <i class="fas fa-arrow-right" 
+
+             onclick="LoadNewsDetail('${_id}')" 
+             
+             data-bs-toggle="modal" 
+             
+             data-bs-target="#exampleModal">
+             </i>
              </div>
-             </div>
+            </div>
          </div>
      </div>
  </div>
@@ -112,12 +120,13 @@ modalDetail.innerHTML =`
 <div class="modal-dialog">
     <div class="modal-content">
 
-        <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">${title} <span class="badge text-bg-warning">${others_info.is_trending ? "Trending" : "" }</span></h1>
+        <div class="modal-header"></span></h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
         <div class="modal-body">
+        <h5 class="card-title mb-1">${title} <span class="badge  text-bg-info">${others_info.is_trending
+            ? "Trending" : "Not Available"}</span></h5>
             <img src="${image_url}" class="img-fluid rounded-start mb-2" style="height:250px;"  alt="...">
             <p>${details}</p>
 
@@ -165,3 +174,8 @@ const showTrending = () =>{
     showAllNews(trendingNews, category_name)
 }
 
+// show Todays Pick
+
+const showTodaysPick = () =>{
+
+}
