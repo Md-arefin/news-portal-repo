@@ -177,5 +177,8 @@ const showTrending = () =>{
 // show Todays Pick
 
 const showTodaysPick = () =>{
+    const todaysPickNews = fetchData.filter(pickNews => pickNews.others_info.is_todays_pick === true);
+    const category_name = document.getElementById('category-name').innerText;
+    showAllNews(todaysPickNews,category_name);
 
 }
